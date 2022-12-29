@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <title>Landing</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./index.html">TripPlanner</a>
+          <form class="d-flex" id="search-form">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search for your next trip"
+              aria-label="Search"
+              id="search-input"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="hotel.html">Lets Plan</a>
+              </li>
+            </ul>
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#signin"
+              data-bs-whatever="@login"
+            >
+              Login
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary ms-2"
+              data-bs-toggle="modal"
+              data-bs-target="#signin"
+              data-bs-whatever="@register"
+              id="sign-up"
+            >
+              Sign Up!
+            </button>
+
+            <!-- Modal -->
+            <div
+              class="modal fade modal-signin"
+              id="signin"
+              tabindex="-1"
+              aria-labelledby="signinLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content rounded-4 shadow">
+                  <div class="modal-header p-5 pb-4 border-bottom-0">
+                    <h5 class="modal-title fw-bold mb-0" id="signinLabel"></h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body p-5 pt-0">
+                    <form class="">
+                      <div class="form-floating mb-3">
+                        <input
+                          type="email"
+                          class="form-control rounded-4"
+                          id="floatingInput"
+                          placeholder="name@example.com"
+                        />
+                        <label for="floatingInput">Email address</label>
+                      </div>
+                      <div class="form-floating mb-3">
+                        <input
+                          type="password"
+                          class="form-control rounded-4"
+                          id="floatingPassword"
+                          placeholder="Password"
+                        />
+                        <label for="floatingPassword">Password</label>
+                      </div>
+                      <button
+                        class="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
+                        type="submit"
+                        id="authSubmit"
+                      >
+                        Sign up
+                      </button>
+                      <small class="text-muted" id="optionalMsg">
+                        By clicking Sign up, you agree to the terms of use.
+                      </small>
+                      <!-- <hr class="my-4" />
+                      <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
+                      <button
+                        class="w-100 py-2 mb-2 btn btn-outline-dark rounded-4"
+                        type="submit"
+                      >
+                        <i class="bi bi-twitter"></i>
+                        Sign up with Twitter
+                      </button>
+                      <button
+                        class="w-100 py-2 mb-2 btn btn-outline-primary rounded-4"
+                        type="submit"
+                      >
+                        <i class="bi bi-facebook"></i>
+                        Sign up with Facebook
+                      </button>
+                      <button
+                        class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-4"
+                        type="submit"
+                      >
+                        <i class="bi bi-github"></i>
+                        Sign up with GitHub
+                      </button>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      id="authSubmit"
+                    ></button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- section where pre-populated data is shown -->
+    <section id="home-section">
+      
+  </div>
+</header>
+
+<header class="mb-7">
+
+  <!-- Navbar -->
+  <nav style="z-index: 1;
+              min-height: 58.59px;
+              " class="navbar navbar-expand-lg navbar-dark bg-dark">
+  </nav>
+
+
+</header>
+<!--Main layout-->
+    <main>
+        <div class="row" style="text-align: center" >
+            <form id="searchWeather" action="">
+              <h3>Imagine checking one place for all your travel details and getting a heads up as things happen throughout your trip.Check current weather of your destination.</h3>
+                 <p><input type="search" id="search" placeholder="Search by city name">
+              <button id="submitbtn" type="submit">check</button></p>
+            </form>
+        </div>
+        <div class="row" id="weather" style="text-align: center">
+            <!--<div>
+                <img src="https://openweathermap.org/img/wn/04n@2x.png" alt="">
+            </div>
+            <div class="row">
+                <h2>32 ℃</h2>
+                <h4> Clear </h4>
+            </div>-->
+        </div>
+    </main>
+
+<footer>
+
+</footer>
+<!--Footer-->
+    <!-- scripts for firebase,bootstrap and other javascipt plugins -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- javascript main file -->
+    <script src="./main.js"></script>
+  </body>
+</html>
