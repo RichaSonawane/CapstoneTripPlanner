@@ -302,17 +302,17 @@ const day = document.querySelector("#day");
 const header = document.querySelector("#header");
 const content = document.querySelector("#content");
 
+
 let errCallback = (err) => console.log(err);
 
 function submitHandler(e) {
   e.preventDefault();
 
   if (day.value < 1) {
-    alert("Do you really want to delete this?");
+    alert("You are going to delete this itinerary item.");
     return;
   }
 
-  console.log("here");
   let body = {
     day: +day.value,
     header: header.value,
@@ -327,15 +327,41 @@ function submitHandler(e) {
   });
 }
 function deleteList(id) {
+  console.log(id)
   axios
     .delete(`http://localhost:4040/api/list/${id}`)
     .then(() => getList())
     .catch((err) => console.log(err));
 }
-function updateList(id) {
+function updateList(id,newcontent) {
+//   const card = document.getElementById("#card");
+let btn = document.getElementById("#editBtn");
+//   console.log(id, newcontent);
+//  
+//  const input =document.createElement('input');
+//  
+//  input.value= newcontent;
+//  card.appendChild(input)
+//  const parent = btn.parentElement;
+//  parent.parentElement.removeChild(parent);
+//  //card.insertBefore(input,pTag);
+//  //card.removeChild(pTag);
+//  //btn.textContent="save";
+// //card.appendChild(input)
+//prompt("edit thecontent", newcontent)
+const pTag = document.getElementById("#cardContent");
+const div=document.getElementById("#card")
+const input = document.createElement("input");
+input.classList.add("card-text");
+input.type = "text";
+input.value=newcontent;
+console.log(input)
+//div.remove()
+
+
+  
   let bodyObj = {
-    header: header.value,
-    content: content.value,
+    content: newcontent
   };
   axios
     .put(`http://localhost:4040/api/list/${id}`, bodyObj)
@@ -347,15 +373,17 @@ function getList() {
   listContainer.innerHTML = "";
   axios.get("http://localhost:4040/api/list/").then((res) => {
     let { data: list } = res;
+listContainer.innerHTML='';
+
     list.forEach((element) => {
       let listcard = `
  
-  <div class="card border-info mb-3" style="max-width: 18rem;">
+  <div id="card" class="card border-info mb-3" style="max-width: 18rem;">
   <div class="card-header">Day ${element.day}</div>
     <h4 class="card-title">${element.header}</h4>
-    <p class="card-text">${element.content}</p>
-    <button onclick="deleteList(${element["list_id"]})">Delete</button>
-    <button onclick="updateList(${element["list_id"]})">Update</button>
+    <p class="card-text" id="cardContent">${element.content}</p>
+    <p><button onclick="deleteList('${element.list_id}')">Delete</button>
+    <button id="editBtn" onclick="updateList('${element["list_id"]}','${element["content"]}')">Update</button></p>
   </div>
     `;
       listContainer.innerHTML += listcard;
