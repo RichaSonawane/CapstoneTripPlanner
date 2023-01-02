@@ -296,7 +296,7 @@ function buildIWContent(place) {
 window.initMap = initMap;
 
 //--------------for http requests------------------------------------------
-const form = document.querySelector("form");
+const form = document.getElementById("listform");
 const listContainer = document.querySelector("#list-container");
 const day = document.querySelector("#day");
 const header = document.querySelector("#header");
@@ -333,17 +333,36 @@ function deleteList(id) {
     .then(() => getList())
     .catch((err) => console.log(err));
 }
-function updateList(id,newcontent) {
+
+function update(id,type){
+	 //var checkboxValues=document.getElementById("mycheckbox")
+  //  chechbox.onclick="return false";
+  //  chechbox.checked=true
 
 
 
-  
-  let bodyObj = {
-    content: newcontent
-  };
+
+
   axios
-    .put(`http://localhost:4040/api/list/${id}`, bodyObj)
-    .then((res) => console.log(1, res))
+    .put(`http://localhost:4040/api/list/${id}`, { type })
+    .then(() => {
+        var checkboxValues =
+          JSON.parse(localStorage.getItem("checkboxValues")) || {};
+        var $checkboxes = $("#checkbox-container :checkbox");
+
+        $checkboxes.on("change", function () {
+          $checkboxes.each(function () {
+            checkboxValues[this.id] = this.checked;
+          });
+          localStorage.setItem(
+            "checkboxValues",
+            JSON.stringify(checkboxValues)
+          );
+        });
+        $.each(checkboxValues, function (key, value) {
+          $("#" + key).prop("checked", value);
+        });
+      getList()})
     .catch((err) => console.log(err));
 }
 
@@ -362,7 +381,11 @@ listContainer.innerHTML='';
     <h4 class="card-title">${element.header}</h4>
     <p class="card-text" id="cardContent">${element.content}</p>
     <p><button onclick="deleteList('${element.list_id}')">Delete</button>
-    <button id="editBtn" onclick="updateList('${element["list_id"]}','${element["content"]}')">Update</button></p>
+    <div id="checkbox-container">
+  <input class="form-check-input" onclick="update('${element["list_id"]}','checked')" type="checkbox" value="" id="mycheckbox" />
+  <label class="form-check-label" for="flexCheckDefault">Completed</label>
+  </div>
+</div>
   </div>
   </div>
   </div>
@@ -373,3 +396,31 @@ listContainer.innerHTML='';
 }
 getList();
 form.addEventListener("submit", submitHandler);
+
+//for place to visit---------------------------------
+const placesArray = localStorage.getItem("places")
+  ? JSON.parse(localStorage.getItem("places"))
+  : [];
+const stayText = document.getElementById("staytextinput");
+const stayBtn = document.getElementById("staybtn");
+const stayOutput = document.getElementById("stayOutput");
+
+function placesFunction(eve) {
+  eve.preventDefault();
+  placesArray.push(stayText.value);
+  localStorage.setItem("places", JSON.stringify(placesArray));
+  location.reload();
+}
+function displayItems(){
+  let items = ""
+  for (let i = 0; i < placesArray.length; i++) {
+    items += `<div class="form-outline">
+                  <textarea disabled style="width:450px;">${placesArray[i]}</textarea>
+               </div>
+              `;
+  }
+  stayOutput.innerHTML = items
+}
+
+stayBtn.addEventListener('click',placesFunction);
+displayItems();

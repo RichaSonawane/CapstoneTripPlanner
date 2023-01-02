@@ -36,14 +36,17 @@ module.exports = {
   },
   updateList:(req,res)=>{
     const { id }=req.params;
-    let {header,content}=req.body;
+    let {type}=req.body;
+    if (type=="checked"){    
     sequelize
       .query(
-        `update list set header='${header}',content = '${content}'
+        `update list set status='completed'
     where list_id='${id}';
     `
       )
       .then(() => res.sendStatus(200))
       .catch((err) => console.log(err));
   }
+    
+}
 };

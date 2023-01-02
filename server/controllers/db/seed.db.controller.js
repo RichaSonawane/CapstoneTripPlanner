@@ -30,7 +30,8 @@ module.exports = {
                 list_id serial primary key,
                 day integer not null,
                 header varchar(500) not null, 
-                content text not null
+                content text not null,
+                status varchar(100)
             );
         `
           )
