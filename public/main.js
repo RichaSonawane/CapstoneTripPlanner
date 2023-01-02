@@ -117,7 +117,7 @@ authModal.addEventListener("show.bs.modal", function (event) {
 //end modal code for login/register
 
 //weatherAPI
-const API_KEY = `214dc7e158e2900c1383e8dc566040d7`;
+const API_KEY = ``;
 const form = document.querySelector("searchWeather");
 const search = document.querySelector("#search");
 const weather = document.querySelector("#weather");
