@@ -334,29 +334,7 @@ function deleteList(id) {
     .catch((err) => console.log(err));
 }
 function updateList(id,newcontent) {
-//   const card = document.getElementById("#card");
-let btn = document.getElementById("#editBtn");
-//   console.log(id, newcontent);
-//  
-//  const input =document.createElement('input');
-//  
-//  input.value= newcontent;
-//  card.appendChild(input)
-//  const parent = btn.parentElement;
-//  parent.parentElement.removeChild(parent);
-//  //card.insertBefore(input,pTag);
-//  //card.removeChild(pTag);
-//  //btn.textContent="save";
-// //card.appendChild(input)
-//prompt("edit thecontent", newcontent)
-const pTag = document.getElementById("#cardContent");
-const div=document.getElementById("#card")
-const input = document.createElement("input");
-input.classList.add("card-text");
-input.type = "text";
-input.value=newcontent;
-console.log(input)
-//div.remove()
+
 
 
   
@@ -377,13 +355,16 @@ listContainer.innerHTML='';
 
     list.forEach((element) => {
       let listcard = `
- 
-  <div id="card" class="card border-info mb-3" style="max-width: 18rem;">
+ <div class="card-group">
+  <div id="card" class="card border-info mb-3" >
   <div class="card-header">Day ${element.day}</div>
+    <div class="card-body text-info">
     <h4 class="card-title">${element.header}</h4>
     <p class="card-text" id="cardContent">${element.content}</p>
     <p><button onclick="deleteList('${element.list_id}')">Delete</button>
     <button id="editBtn" onclick="updateList('${element["list_id"]}','${element["content"]}')">Update</button></p>
+  </div>
+  </div>
   </div>
     `;
       listContainer.innerHTML += listcard;

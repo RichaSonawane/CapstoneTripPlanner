@@ -4,8 +4,14 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 
+const corsOptions = {
+  exposedHeaders: "Authorization",
+};
+
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
+//app.use(cors());
+
 app.use(express.static("public"));
 
 const { userLogin, userSignup } = require("./controllers/authController");
@@ -16,6 +22,7 @@ const {
   deleteList,
   updateList
 } = require("./controllers/listController");
+const { isAuthenticated } = require("./controllers/middleware/isAuthenticated");
 
 // //entry-point for app
 // app.get('/',(req,res)=> {

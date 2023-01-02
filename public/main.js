@@ -13,61 +13,67 @@ const baseURL = `http://localhost:4040`;
 //     .catch((err) => console.log(err));
 // };
 
-const handleSearch = (e) => {
-  e.preventDefault();
-  const userInput = searchInput.value;
-  displaySection.innerHTML = "";
-  searchInput.value = ``;
-  axios
-    .get(`${baseURL}/api/query/?search=${userInput}`)
-    .then((res) => {
-      // console.log(res.data);
-      res.data.results.map((result) => {
-        let displayDiv = document.createElement("div");
-        displayDiv.classList.add("card");
-        displayDiv.style.width = "18rem";
-        let resultObj = JSON.stringify({ ...result }).replace(
-          /[\/\(\)\']/g,
-          "&apos;"
-        );
-        // console.log(resultObj);
-        displayDiv.innerHTML = `
-          <img src='https://image.tmdb.org/t/p/w500/${result.poster_path}'/>
-          <div class="card-body bg-light">
-          <h5 class="card-title">${result.title}</h5>
-          <p class="card-text overflow-hidden">${result.overview}</p>
-          <a href="#" onclick='addToList(${resultObj})' class="btn btn-primary">Add to list</a>
-          </div>
-          `;
-        displaySection.appendChild(displayDiv);
-      });
-    })
-    .catch((err) => console.log(err));
-};
+// const handleSearch = (e) => {
+//   e.preventDefault();
+//   const userInput = searchInput.value;
+//   displaySection.innerHTML = "";
+//   searchInput.value = ``;
+//   axios
+//     .get(`${baseURL}/api/query/?search=${userInput}`)
+//     .then((res) => {
+//       // console.log(res.data);
+//       res.data.results.map((result) => {
+//         let displayDiv = document.createElement("div");
+//         displayDiv.classList.add("card");
+//         displayDiv.style.width = "18rem";
+//         let resultObj = JSON.stringify({ ...result }).replace(
+//           /[\/\(\)\']/g,
+//           "&apos;"
+//         );
+//         // console.log(resultObj);
+//         displayDiv.innerHTML = `
+//           <img src='https://image.tmdb.org/t/p/w500/${result.poster_path}'/>
+//           <div class="card-body bg-light">
+//           <h5 class="card-title">${result.title}</h5>
+//           <p class="card-text overflow-hidden">${result.overview}</p>
+//           <a href="#" onclick='addToList(${resultObj})' class="btn btn-primary">Add to list</a>
+//           </div>
+//           `;
+//         displaySection.appendChild(displayDiv);
+//       });
+//     })
+//     .catch((err) => console.log(err));
+// };
 
-const getTrending = () => {
-  axios.get(`${baseURL}/api/trending`).then().catch();
-};
-const getPopular = () => {
-  axios.get(`${baseURL}/api/popular`).then().catch();
-};
+// const getTrending = () => {
+//   axios.get(`${baseURL}/api/trending`).then().catch();
+// };
+// const getPopular = () => {
+//   axios.get(`${baseURL}/api/popular`).then().catch();
+// };
 
 const login = (body) =>
   axios
     .post(`${baseURL}/api/login`, body)
     .then((res) => {
-      console.log("hit login");
-      sessionStorage.setItem("user", JSON.stringify(res.data));
-      window.location.href;
+      console.log(res.data);
+      let token = res.data.token;
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("userId", res.data.watch_user_id);
+      window.location.href = `/public/hotel.html`;
     })
     .catch((err) => console.log(err));
 
 const signUp = (body) =>
   axios
     .post(`${baseURL}/api/signUp`, body)
-    .then((res) => {
-      sessionStorage.setItem("user", JSON.stringify(res.data));
-      window.location.reload();
+    .then(async (res) => {
+      // console.log("hit signup");
+      let token = await res.data.token;
+      console.log(res.data);
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("userId", res.data.watch_user_id);
+      window.location.href = `/public/hotel.html`;
     })
     .catch((err) => console.log(err));
 
@@ -75,7 +81,7 @@ const handleAuth = (authType, body) => {
   authType === "SignUp" ? signUp(body) : login(body);
 };
 
-searchForm.addEventListener("submit", handleSearch);
+//searchForm.addEventListener("submit", handleSearch);
 
 //bootstrap modal for login/register starts
 var authModal = document.getElementById("signin");
@@ -106,13 +112,12 @@ authModal.addEventListener("show.bs.modal", function (event) {
     authSubmit.textContent.trim() === "Login"
       ? handleAuth("Login", body)
       : handleAuth("SignUp", body);
-      window.location.reload();
   });
 });
 //end modal code for login/register
 
 //weatherAPI
-const API_KEY = '';
+const API_KEY = `214dc7e158e2900c1383e8dc566040d7`;
 const form = document.querySelector("searchWeather");
 const search = document.querySelector("#search");
 const weather = document.querySelector("#weather");
@@ -127,17 +132,18 @@ const submit = document.querySelector("#submitbtn");
 //   const data = await response.json();
 //   return showWeather(data);
 // };
-function submithandler(e){
-const search = document.querySelector("#search");
-e.preventDefault();
-console.log(search.value);
-getWeather(search.value)
+function submithandler(e) {
+  const search = document.querySelector("#search");
+  e.preventDefault();
+  console.log(search.value);
+  getWeather(search.value);
 }
 
-function getWeather(city){
+function getWeather(city) {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
-  axios.get(url).then((data)=>{
-    return showWeather(data.data)})
+  axios.get(url).then((data) => {
+    return showWeather(data.data);
+  });
 }
 
 const showWeather = (data) => {
