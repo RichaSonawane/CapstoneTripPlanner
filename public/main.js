@@ -5,52 +5,7 @@ const searchInput = document.querySelector("#search-input");
 const displaySection = document.querySelector("#display-section");
 const baseURL = `http://localhost:4040`;
 
-// const addToList = (movieObj) => {
-//   console.log(movieObj);
-//   axios
-//     .post(`${baseURL}/api/list`, { movieObj })
-//     .then((res) => alert(res.data))
-//     .catch((err) => console.log(err));
-// };
 
-// const handleSearch = (e) => {
-//   e.preventDefault();
-//   const userInput = searchInput.value;
-//   displaySection.innerHTML = "";
-//   searchInput.value = ``;
-//   axios
-//     .get(`${baseURL}/api/query/?search=${userInput}`)
-//     .then((res) => {
-//       // console.log(res.data);
-//       res.data.results.map((result) => {
-//         let displayDiv = document.createElement("div");
-//         displayDiv.classList.add("card");
-//         displayDiv.style.width = "18rem";
-//         let resultObj = JSON.stringify({ ...result }).replace(
-//           /[\/\(\)\']/g,
-//           "&apos;"
-//         );
-//         // console.log(resultObj);
-//         displayDiv.innerHTML = `
-//           <img src='https://image.tmdb.org/t/p/w500/${result.poster_path}'/>
-//           <div class="card-body bg-light">
-//           <h5 class="card-title">${result.title}</h5>
-//           <p class="card-text overflow-hidden">${result.overview}</p>
-//           <a href="#" onclick='addToList(${resultObj})' class="btn btn-primary">Add to list</a>
-//           </div>
-//           `;
-//         displaySection.appendChild(displayDiv);
-//       });
-//     })
-//     .catch((err) => console.log(err));
-// };
-
-// const getTrending = () => {
-//   axios.get(`${baseURL}/api/trending`).then().catch();
-// };
-// const getPopular = () => {
-//   axios.get(`${baseURL}/api/popular`).then().catch();
-// };
 
 const login = (body) =>
   axios
@@ -60,7 +15,7 @@ const login = (body) =>
       let token = res.data.token;
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("userId", res.data.watch_user_id);
-      window.location.href = `/public/hotel.html`;
+      window.location.href = `/public/planner.html`;
     })
     .catch((err) => console.log(err));
 
@@ -73,7 +28,7 @@ const signUp = (body) =>
       console.log(res.data);
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("userId", res.data.watch_user_id);
-      window.location.href = `/public/hotel.html`;
+      window.location.href = `/public/planner.html`;
     })
     .catch((err) => console.log(err));
 
@@ -140,7 +95,7 @@ function submithandler(e) {
 }
 
 function getWeather(city) {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`;
   axios.get(url).then((data) => {
     return showWeather(data.data);
   });
@@ -156,7 +111,7 @@ const showWeather = (data) => {
             <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png"alt="">
         </div>
         <div>
-            <h2>${data.main.temp} ℃</h2>
+            <h2>${data.main.temp} &#8457</h2>
             <h4> ${data.weather[0].main} </h4>
         </div>
     `;

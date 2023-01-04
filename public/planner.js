@@ -302,14 +302,13 @@ const day = document.querySelector("#day");
 const header = document.querySelector("#header");
 const content = document.querySelector("#content");
 
-
 let errCallback = (err) => console.log(err);
 
 function submitHandler(e) {
   e.preventDefault();
-
+  console.log("handler");
   if (day.value < 1) {
-    alert("You are going to delete this itinerary item.");
+    alert("Please fill all the fields in form.");
     return;
   }
 
@@ -327,50 +326,69 @@ function submitHandler(e) {
   });
 }
 function deleteList(id) {
-  console.log(id)
+  console.log(id, "deleting");
   axios
     .delete(`http://localhost:4040/api/list/${id}`)
-    .then(() => getList())
+    .then(() => {
+      console.log("in delete");
+      getList();
+      console.log("after getlist");
+    })
     .catch((err) => console.log(err));
 }
 
-function update(id,type){
-	 //var checkboxValues=document.getElementById("mycheckbox")
-  //  chechbox.onclick="return false";
-  //  chechbox.checked=true
+function updateList(id) {
+  console.log("updateList");
+  const editInput = document.getElementById("editInput");
+  console.log(editInput.value);
+  let updatedContent = editInput.value;
+  //console.log(updatedContent)
 
-
-
-
+  // let newbodyobj={
+  //   day: this.day,
+  //   header: this.header,
+  //   content:updatedContent
+  // }
 
   axios
-    .put(`http://localhost:4040/api/list/${id}`, { type })
+    .put(`http://localhost:4040/api/list/${id}`, { updatedContent })
     .then(() => {
-        var checkboxValues =
-          JSON.parse(localStorage.getItem("checkboxValues")) || {};
-        var $checkboxes = $("#checkbox-container :checkbox");
+      // var checkboxValues =
+      //   JSON.parse(localStorage.getItem("checkboxValues")) || {};
+      // var $checkboxes = $("#checkbox-container :checkbox");
 
-        $checkboxes.on("change", function () {
-          $checkboxes.each(function () {
-            checkboxValues[this.id] = this.checked;
-          });
-          localStorage.setItem(
-            "checkboxValues",
-            JSON.stringify(checkboxValues)
-          );
-        });
-        $.each(checkboxValues, function (key, value) {
-          $("#" + key).prop("checked", value);
-        });
-      getList()})
+      // $checkboxes.on("change", function () {
+      //   $checkboxes.each(function () {
+      //     checkboxValues[this.id] = this.checked;
+      //   });
+      //   localStorage.setItem("checkboxValues", JSON.stringify(checkboxValues));
+      // });
+      // $.each(checkboxValues, function (key, value) {
+      //   $("#" + key).prop("checked", value);
+      // });
+      getList();
+    })
     .catch((err) => console.log(err));
+}
+
+function editSection(element, id) {
+  const input = document.createElement("input");
+  input.setAttribute("id", "editInput");
+  const edit = document.getElementById("cardContent");
+  element.parentNode.replaceChild(input, edit);
+  input.type = "text";
+  let newContent = edit.innerHTML;
+  input.value = newContent;
+  console.log(edit);
+  console.log(newContent);
+  console.log(element);
 }
 
 function getList() {
   listContainer.innerHTML = "";
   axios.get("http://localhost:4040/api/list/").then((res) => {
     let { data: list } = res;
-listContainer.innerHTML='';
+    listContainer.innerHTML = "";
 
     list.forEach((element) => {
       let listcard = `
@@ -378,11 +396,12 @@ listContainer.innerHTML='';
   <div id="card" class="card border-info mb-3" >
   <div class="card-header">Day ${element.day}</div>
     <div class="card-body text-info">
-    <h4 class="card-title">${element.header}</h4>
-    <p class="card-text" id="cardContent">${element.content}</p>
-    <p><button onclick="deleteList('${element.list_id}')">Delete</button>
+    <h4 class="card-title" id="cardTitle" >${element.header}</h4>
+    <p class="card-text" id="cardContent" onclick="editSection(this,'${element["list_id"]}')">${element.content}</p>
+    <p><button type="button" onclick="deleteList('${element.list_id}')">Delete</button>
+     <button id="saveBtn" type="button" onclick="updateList('${element.list_id}')">Save</button></p>
     <div id="checkbox-container">
-  <input class="form-check-input" onclick="update('${element["list_id"]}','checked')" type="checkbox" value="" id="mycheckbox" />
+  <input class="form-check-input" onclick="update('${element["list_id"]}','true')"  type="checkbox" value="" id="mycheckbox" />
   <label class="form-check-label" for="flexCheckDefault">Completed</label>
   </div>
 </div>
@@ -411,16 +430,16 @@ function placesFunction(eve) {
   localStorage.setItem("places", JSON.stringify(placesArray));
   location.reload();
 }
-function displayItems(){
-  let items = ""
+function displayItems() {
+  let items = "";
   for (let i = 0; i < placesArray.length; i++) {
     items += `<div class="form-outline">
                   <textarea disabled style="width:450px;">${placesArray[i]}</textarea>
                </div>
               `;
   }
-  stayOutput.innerHTML = items
+  stayOutput.innerHTML = items;
 }
 
-stayBtn.addEventListener('click',placesFunction);
+stayBtn.addEventListener("click", placesFunction);
 displayItems();

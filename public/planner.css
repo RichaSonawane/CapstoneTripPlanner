@@ -14,11 +14,19 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-image: url(./hotel.jpg);
+  background-image: url(./planner.jpg);
 }
 
 body {
-  padding: 0 !important;
+  padding: 0px !important;
+ 
+}
+main{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items:flex-start;
+ margin-left: 20px;
 }
 
 table {
@@ -40,17 +48,18 @@ table {
 }
 
 #map {
-  margin-top: 40px;
+  position: fixed;
+  margin-top: 5px;
   width: 440px;
 }
 
 #listing {
-  position: absolute;
+position:absolute;
   width: 200px;
   height: 470px;
   overflow: auto;
-  left: 442px;
-  top: 0px;
+  left: 440px;
+  top: 175px;
   cursor: pointer;
   overflow-x: hidden;
 }

@@ -16,24 +16,70 @@
     <link rel="stylesheet" type="text/css" href="planner.css" />
   </head>
   <body>
-     <header>
+    
+     <header> 
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="./index.html">TripPlanner</a>
-            </div>
+          <a class="navbar-brand" href="./index.html">TripPlanner</a>   
       </nav>
-  <nav style="z-index: 1;
+       <nav style="z-index: 1;
               min-height: 58.59px;
               " class="navbar navbar-expand-lg navbar-dark bg-dark">
+              
   </nav>
-</header>
+    </header>
 
-  <div class="row w-100">
-  <div class="col-lg-6 my-4">
-      <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
-  
-    <div class="hotel-search">
-      <div id="findhotels">Find hotels in:</div>
+ <main>
+  <!---->
+ <div class="col-lg-4 my-4 d-flex align-items-center" > 
+<form id="listform">
+    <div>
+      <h2>Build Your Own Customized Trip Plan</h2>
+      <h4>Make organizing your trip plans a breeze</h4>
+      
+             <div class="col-auto">
+    <label class="visually-hidden" for="inlineFormSelectPref">Days</label>
+    <select class="select" id="day">
+      <option value="1" selected>Day 1</option>
+      <option value="2">Day 2</option>
+      <option value="3">Day 3</option>
+      <option value="4">Day 4</option>
+      <option value="5">Day 5</option>
+      <option value="6">Day 6</option>
+      <option value="7">Day 7</option>
+      <option value="8">Day 8</option>
+      <option value="9">Day 9</option>
+      <option value="10">Day 10</option>
+    </select>
+  </div>
+  <div class="col-auto">
+    <div class="form-outline">
+      <label class="form-label" for="form11Example1">About the day</label>
+      <input type="text" id="header" class="form-control" />
+    </div>
+  </div>
+    <div class="col-auto">
+  <div class="form-outline">
+     <label class="form-label" for="textAreaExample">Activity</label>
+  <textarea class="form-control" id="content" rows="4"></textarea>
+ 
+</div>
+<div><h2></h2></div>
+</div>
+    <button type="submit" class="btn btn-primary" id="addbtn">Add</button>
+    <h1>   </h1>
+</form>
+   
+   <section id="list-container"></section>
+ </div>
+  </div>
+
+
+<!--map done-->
+<div class="col-lg-4 my-4 d-flex align-items-center">
+       <div id="map-container-google-2" class="z-depth-1-half map-container" style="height: 500px">
+ <div class="hotel-search">
+      <div id="findhotels" >Find hotels in:</div>
 
       <div id="locationField">
         <input id="autocomplete" placeholder="Enter a city" type="text" />
@@ -93,6 +139,7 @@
         </table>
       </div>
     </div>
+    
     <!--for user additional inputs-->
   
 <form class="row gy-2 gx-3 align-items-center" style="margin: 5px;">
@@ -111,54 +158,11 @@
     
  </div>
   </div>
-<!--map done-->
 
-  <div class="col-lg-6 my-4 d-flex align-items-center">
-<form id="listform">
-    <div>
-      <h2>Build Your Own Customized Trip Plan</h2>
-      <h4>Make organizing your trip plans a breeze</h4>
-      
-             <div class="col-auto">
-    <label class="visually-hidden" for="inlineFormSelectPref">Days</label>
-    <select class="select" id="day">
-      <option value="1" selected>Day 1</option>
-      <option value="2">Day 2</option>
-      <option value="3">Day 3</option>
-      <option value="4">Day 4</option>
-      <option value="5">Day 5</option>
-      <option value="6">Day 6</option>
-      <option value="7">Day 7</option>
-      <option value="8">Day 8</option>
-      <option value="9">Day 9</option>
-      <option value="10">Day 10</option>
-    </select>
-  </div>
-  <div class="col-auto">
-    <div class="form-outline">
-      <label class="form-label" for="form11Example1">About the day</label>
-      <input type="text" id="header" class="form-control" />
     </div>
   </div>
-    <div class="col-auto">
-  <div class="form-outline">
-     <label class="form-label" for="textAreaExample">Activity</label>
-  <textarea class="form-control" id="content" rows="4"></textarea>
- 
-</div>
-<div><h2></h2></div>
-</div>
-    <button type="submit" class="btn btn-primary" id="addbtn">Add</button>
-    <h1>   </h1>
-</form>
-   
-   <section id="list-container"></section>
- </div>
-  </div>
-    </div>
-  </div>
-</div>
-
+</main>
+<!--itinerary done-->
     <!-- 
      The `defer` attribute causes the callback to execute after the full HTML
      document has been parsed. For non-blocking uses, avoiding race conditions,
@@ -167,9 +171,9 @@
     -->
      <script src="../node_modules/axios/dist/axios.min.js"></script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCuVNHpBl-GRwoN5YSLq1F3iPbtTn1-Xfo&callback=initMap&libraries=places&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap&libraries=places&v=weekly"
       defer
     ></script>
-       <script src="hotel.js"></script>
+       <script src="planner.js"></script>
   </body>
 </html>
