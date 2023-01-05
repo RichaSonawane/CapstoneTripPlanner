@@ -1,6 +1,4 @@
-# Project Title
-
-TripPlanner
+# TripPlanner
 
 ## Description
 
