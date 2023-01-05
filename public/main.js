@@ -126,7 +126,7 @@ const showWeather = (data) => {
     main.style.backgroundImage = "url('images/rain.jpg')";
   } else if (weatherType.textContent.match("Snow")) {
     main.style.backgroundImage = "url('images/snow.jpg')";
-  } else if (weatherType.textContent.match("Haze")) {
+  } else if (weatherType.textContent.match("Mist")) {
     main.style.backgroundImage = "url('images/haze.jpg')";
   } else if (weatherType.textContent.match("Thunderstorm")) {
     main.style.backgroundImage = "url('images/thunderstorm1.jpg')";

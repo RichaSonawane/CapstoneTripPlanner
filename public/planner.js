@@ -347,6 +347,7 @@ function updateList(id) {
   axios
     .put(`http://localhost:4040/api/list/${id}`, { updatedContent })
     .then(() => {
+      //for future enhancements
       // var checkboxValues =
       //   JSON.parse(localStorage.getItem("checkboxValues")) || {};
       // var $checkboxes = $("#checkbox-container :checkbox");
