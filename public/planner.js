@@ -342,13 +342,7 @@ function updateList(id) {
   const editInput = document.getElementById("editInput");
   console.log(editInput.value);
   let updatedContent = editInput.value;
-  //console.log(updatedContent)
-
-  // let newbodyobj={
-  //   day: this.day,
-  //   header: this.header,
-  //   content:updatedContent
-  // }
+ 
 
   axios
     .put(`http://localhost:4040/api/list/${id}`, { updatedContent })
@@ -397,13 +391,13 @@ function getList() {
   <div class="card-header">Day ${element.day}</div>
     <div class="card-body text-info">
     <h4 class="card-title" id="cardTitle" >${element.header}</h4>
-    <p class="card-text" id="cardContent" onclick="editSection(this,'${element["list_id"]}')">${element.content}</p>
+    <p class="card-text" id="cardContent" onmouseover="this.style='background-color:#ADD8E6;';" onmouseout="this.style='background-color:white';" title="click here to make the changes!" onclick="editSection(this,'${element["list_id"]}')">${element.content}</p>
     <p><button type="button" onclick="deleteList('${element.list_id}')">Delete</button>
      <button id="saveBtn" type="button" onclick="updateList('${element.list_id}')">Save</button></p>
-    <div id="checkbox-container">
+    <!--<div id="checkbox-container">
   <input class="form-check-input" onclick="update('${element["list_id"]}','true')"  type="checkbox" value="" id="mycheckbox" />
   <label class="form-check-label" for="flexCheckDefault">Completed</label>
-  </div>
+  </div>-->
 </div>
   </div>
   </div>
@@ -434,7 +428,7 @@ function displayItems() {
   let items = "";
   for (let i = 0; i < placesArray.length; i++) {
     items += `<div class="form-outline">
-                  <textarea disabled style="width:450px;">${placesArray[i]}</textarea>
+                  <textarea disabled style="width:450px;"> ${placesArray[i]}</textarea>
                </div>
               `;
   }

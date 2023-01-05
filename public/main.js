@@ -5,8 +5,6 @@ const searchInput = document.querySelector("#search-input");
 const displaySection = document.querySelector("#display-section");
 const baseURL = `http://localhost:4040`;
 
-
-
 const login = (body) =>
   axios
     .post(`${baseURL}/api/login`, body)
@@ -112,13 +110,27 @@ const showWeather = (data) => {
         </div>
         <div>
             <h2>${data.main.temp} &#8457</h2>
-            <h4> ${data.weather[0].main} </h4>
+            <h4 id="weather"> ${data.weather[0].main} </h4>
         </div>
     `;
+  let weatherType = document.getElementById("weather");
+  let main = document.querySelector("main");
+  console.log(weatherType.textContent);
+  if (weatherType.textContent.match("Clear")) {
+    main.style.backgroundImage = "url('images/clear.jpg')";
+  } else if (weatherType.textContent.match("Drizzle")) {
+    main.style.backgroundImage = "url('images/drizzle.jpg')";
+  } else if (weatherType.textContent.match("Clouds")) {
+    main.style.backgroundImage = "url('images/cloud.jpg')";
+  } else if (weatherType.textContent.match("Rain")) {
+    main.style.backgroundImage = "url('images/rain.jpg')";
+  } else if (weatherType.textContent.match("Snow")) {
+    main.style.backgroundImage = "url('images/snow.jpg')";
+  } else if (weatherType.textContent.match("Haze")) {
+    main.style.backgroundImage = "url('images/haze.jpg')";
+  } else if (weatherType.textContent.match("Thunderstorm")) {
+    main.style.backgroundImage = "url('images/thunderstorm1.jpg')";
+  }
 };
-submit.addEventListener("click", submithandler);
 
-// form.addEventListener("submit", function (event) {
-//   getWeather(search.value);
-//   event.preventDefault();
-// });
+submit.addEventListener("click", submithandler);
