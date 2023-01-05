@@ -14,6 +14,9 @@ Welcome to tripPlanner.If you love to travel but struggles to keep a track of al
 <a href="https://github.com/RichaSonawane/CapstoneTripPlanner.git"><img src="public\Images\landingPage.png" width="550px">
 </a>
 
+<hr>
+<a href="https://github.com/RichaSonawane/CapstoneTripPlanner.git"><img src="public\Images\plannerpage.png" width="550px">
+</a>
 
 ## Getting Started
 
