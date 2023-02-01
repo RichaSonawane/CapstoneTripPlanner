@@ -15,7 +15,8 @@ const login = (body) =>
       sessionStorage.setItem("userId", res.data.watch_user_id);
       window.location.href = `/public/planner.html`;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {console.log(err)
+    alert("Invalid Username or password.")});
 
 const signUp = (body) =>
   axios

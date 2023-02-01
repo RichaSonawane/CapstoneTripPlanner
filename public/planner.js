@@ -339,7 +339,7 @@ function deleteList(id) {
 
 function updateList(id) {
   console.log("updateList");
-  const editInput = document.getElementById("editInput");
+  const editInput = document.getElementById("editedString");
   console.log(editInput.value);
   let updatedContent = editInput.value;
  
@@ -368,13 +368,12 @@ function updateList(id) {
 
 function editSection(element, id) {
   const input = document.createElement("input");
-  input.setAttribute("id", "editInput");
-  const edit = document.getElementById("cardContent");
-  element.parentNode.replaceChild(input, edit);
-  input.type = "text";
-  let newContent = edit.innerHTML;
+  input.setAttribute("id", "editedString")
+  let newContent = element.textContent;
+
   input.value = newContent;
-  console.log(edit);
+   element.replaceWith(input);
+
   console.log(newContent);
   console.log(element);
 }
@@ -392,7 +391,8 @@ function getList() {
   <div class="card-header">Day ${element.day}</div>
     <div class="card-body text-info">
     <h4 class="card-title" id="cardTitle" >${element.header}</h4>
-    <p class="card-text" id="cardContent" onmouseover="this.style='background-color:#ADD8E6;';" onmouseout="this.style='background-color:white';" title="click here to make the changes!" onclick="editSection(this,'${element["list_id"]}')">${element.content}</p>
+    <p class="card-text" id="cardContent" onmouseover="this.style='background-color:#ADD8E6;';" onmouseout="this.style='background-color:white';" 
+    title="click here to make the changes!" onclick="editSection(this,'${element["list_id"]}')">${element.content}</p>
     <p><button type="button" onclick="deleteList('${element.list_id}')">Delete</button>
      <button id="saveBtn" type="button" onclick="updateList('${element.list_id}')">Save</button></p>
     <!--<div id="checkbox-container">
